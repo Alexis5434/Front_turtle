@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { GreetingCard } from '../features/greeting/components/greeting-card'
 import { Button } from '@/components/ui/button'
 
@@ -16,9 +16,14 @@ function HomePage() {
         This minimal shell demonstrates routing, the layout, an error boundary, and the example
         component.
       </p>
-      <div className="mt-6">
-        <GreetingCard name="Developer" hour={9} />
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <div className="w-full">
+          <GreetingCard name="Developer" hour={9} />
+        </div>
         <Button>Hola gobernador</Button>
+        <Button asChild variant="secondary">
+          <Link to="/kds">Abrir Pantalla KDS de Cocina</Link>
+        </Button>
       </div>
     </section>
   )

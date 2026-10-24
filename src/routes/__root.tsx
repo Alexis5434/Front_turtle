@@ -43,6 +43,13 @@ function RootLayout() {
               🐢 {appName}
             </Link>
 
+            <Link
+              to="/kds"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground [&.active]:font-semibold [&.active]:text-primary"
+            >
+              Cocina (KDS)
+            </Link>
+
             {/* Nav links – only show when authenticated */}
             {isAuthenticated && (
               <>
@@ -51,6 +58,12 @@ function RootLayout() {
                   className="text-sm text-muted-foreground hover:text-foreground [&.active]:font-medium [&.active]:text-foreground"
                 >
                   Mesas
+                </Link>
+                <Link
+                  to="/workers"
+                  className="text-sm text-muted-foreground hover:text-foreground [&.active]:font-medium [&.active]:text-foreground"
+                >
+                  Trabajadores
                 </Link>
               </>
             )}

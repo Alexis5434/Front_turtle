@@ -10,59 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KdsRouteImport } from './routes/kds'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as TablesRouteImport } from './routes/tables'
-
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-
-const TablesRoute = TablesRouteImport.update({
-  id: '/tables',
-  path: '/tables',
-  getParentRoute: () => rootRouteImport,
-} as any)
+import { Route as WorkersRouteImport } from './routes/workers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KdsRoute = KdsRouteImport.update({
+  id: '/kds',
+  path: '/kds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TablesRoute = TablesRouteImport.update({
+  id: '/tables',
+  path: '/tables',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkersRoute = WorkersRouteImport.update({
+  id: '/workers',
+  path: '/workers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kds': typeof KdsRoute
   '/login': typeof LoginRoute
   '/tables': typeof TablesRoute
+  '/workers': typeof WorkersRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kds': typeof KdsRoute
   '/login': typeof LoginRoute
   '/tables': typeof TablesRoute
+  '/workers': typeof WorkersRoute
 }
-
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kds': typeof KdsRoute
   '/login': typeof LoginRoute
   '/tables': typeof TablesRoute
+  '/workers': typeof WorkersRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/tables'
+  fullPaths: '/' | '/kds' | '/login' | '/tables' | '/workers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/tables'
-  id: '__root__' | '/' | '/login' | '/tables'
+  to: '/' | '/kds' | '/login' | '/tables' | '/workers'
+  id: '__root__' | '/' | '/kds' | '/login' | '/tables' | '/workers'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KdsRoute: typeof KdsRoute
   LoginRoute: typeof LoginRoute
   TablesRoute: typeof TablesRoute
+  WorkersRoute: typeof WorkersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -72,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kds': {
+      id: '/kds'
+      path: '/kds'
+      fullPath: '/kds'
+      preLoaderRoute: typeof KdsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -88,15 +109,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TablesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/workers': {
+      id: '/workers'
+      path: '/workers'
+      fullPath: '/workers'
+      preLoaderRoute: typeof WorkersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KdsRoute: KdsRoute,
   LoginRoute: LoginRoute,
   TablesRoute: TablesRoute,
+  WorkersRoute: WorkersRoute,
 }
-
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
